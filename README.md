@@ -4,10 +4,17 @@ The **Kubeflow Manifests** are a collection of community-maintained manifests fo
 
 For a stable and conservative experience, we recommend using the [latest stable release](https://github.com/kubeflow/manifests/releases). However, please consult the more up-to-date documentation in the master branch.
 
+<<<<<<< HEAD
 - [**SOON TO BE RELEASED Kubeflow 1.10:**]
   - [`v1.10.0`](https://github.com/kubeflow/manifests/tree/v1.10.0#installation)
 - [**Kubeflow 1.9.1:**]
   - [`v1.9.1`](https://github.com/kubeflow/manifests/tree/v1.9.1#installation)
+=======
+- [**Kubeflow 1.9:**](/docs/releases/kubeflow-1.9/)
+  - [`v1.9.1`](https://github.com/kubeflow/manifests/tree/v1.9.1#installation)
+- [**SOON TO BE RELEASED Kubeflow 1.10:**](/docs/releases/kubeflow-1.9/)
+  - [`v1.10.0`](https://github.com/kubeflow/manifests/tree/v1.10.0#installation)
+>>>>>>> a2f20361 (Synchronize kubeflow kubeflow manifests v1.10.0 rc.2 (#3058))
 
 You can also install the master branch of [`kubeflow/manifests`](https://github.com/kubeflow/manifests) by following the instructions [here](https://github.com/kubeflow/manifests?tab=readme-ov-file#installation) and providing us with feedback.
 
@@ -68,7 +75,11 @@ This repository periodically synchronizes all official Kubeflow components from 
 | KServe | apps/kserve/kserve | [v0.14.1](https://github.com/kserve/kserve/releases/tag/v0.14.1/install/v0.14.1) |
 | KServe Models Web App | apps/kserve/models-web-app | [v0.14.0-rc.0](https://github.com/kserve/models-web-app/tree/v0.14.0-rc.0/config) |
 | Kubeflow Pipelines | apps/pipeline/upstream | [2.4.1](https://github.com/kubeflow/pipelines/tree/2.4.1/manifests/kustomize) |
+<<<<<<< HEAD
 | Kubeflow Model Registry | apps/model-registry/upstream | [v0.2.15.3](https://github.com/kubeflow/model-registry/tree/v0.2.15.3/manifests/kustomize) |
+=======
+| Kubeflow Model Registry | apps/model-registry/upstream | [v0.2.15](https://github.com/kubeflow/model-registry/tree/v0.2.15/manifests/kustomize) |
+>>>>>>> a2f20361 (Synchronize kubeflow kubeflow manifests v1.10.0 rc.2 (#3058))
 
 The following matrix shows the versions of common components used across different Kubeflow projects:
 
@@ -115,7 +126,11 @@ The `example` directory contains an example kustomization for the single command
 #### Prerequisites
 - 16 GB of RAM recommended.
 - 8 CPU cores recommended.
+<<<<<<< HEAD
 - `kind` version 0.27+.
+=======
+- `kind` version 0.26+.
+>>>>>>> a2f20361 (Synchronize kubeflow kubeflow manifests v1.10.0 rc.2 (#3058))
 - `docker` or a more modern tool such as `podman` to run the OCI images for the Kind cluster.
 - Linux kernel subsystem changes to support many pods:
     - `sudo sysctl fs.inotify.max_user_instances=2280`
@@ -679,7 +694,14 @@ pre-commit run
 
 ## Frequently Asked Questions
 
+<<<<<<< HEAD
 - **Q:** What versions of Istio, Knative, Cert-Manager, Argo, ... are compatible with Kubeflow?
   **A:** Please refer to each individual component's documentation for a dependency compatibility range. For Istio, Knative, Dex, Cert-Manager, and OAuth2 Proxy, the versions in `common` are the ones we have validated.
 - **Q:** Can I use Kubeflow in an air-gapped environment?
   **A:** Yes you can. You just need to to get the list of images from our [trivy CVE scanning script](https://github.com/kubeflow/manifests/blob/master/tests/gh-actions/trivy_scan.py), mirror them and replace the references in the manifests with kustomize components and overlays, see [Upgrading and Extending](#upgrading-and-extending). You could also use a simple kyverno policy to replace the images at runtime, which could be easier to maintain.
+=======
+- **Q:** What versions of Istio, Knative, Cert-Manager, Argo, ... are compatible with Kubeflow? \
+  **A:** Please refer to each individual component's documentation for a dependency compatibility range. For Istio, Knative, Dex, Cert-Manager, and OAuth2 Proxy, the versions in `common` are the ones we have validated.
+- **Q:** Can I use an earlier version of Kustomize with Kubeflow manifests? \
+  **A:** No, it is not supported anymore, although it might be possible with manual effort.
+>>>>>>> a2f20361 (Synchronize kubeflow kubeflow manifests v1.10.0 rc.2 (#3058))
