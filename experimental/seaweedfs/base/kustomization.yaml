@@ -4,6 +4,8 @@ namespace: kubeflow
 
 resources:
 - seaweedfs-deployment.yaml
-- seaweedfs-pvc.yaml
 - seaweedfs-service.yaml
-- seadweedfs-networkpolicy.yaml
+- seaweedfs-secret.yaml
+- seaweedfs-pvc.yaml
+- seaweedfs-networkpolicy.yaml
+- seaweedfs-configmap.yaml

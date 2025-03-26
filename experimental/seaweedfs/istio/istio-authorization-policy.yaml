@@ -1,28 +1,70 @@
 apiVersion: security.istio.io/v1beta1
 kind: AuthorizationPolicy
 metadata:
-  name: seaweedfs-service
+  name: seaweedfs-s3-service
+  namespace: kubeflow
 spec:
   action: ALLOW
   selector:
     matchLabels:
       app: seaweedfs
+      component: s3
   rules:
   - from:
     - source:
         principals:
         - cluster.local/ns/kubeflow/sa/ml-pipeline
+        - cluster.local/ns/kubeflow/sa/pipeline-runner
   - from:
     - source:
         principals:
         - cluster.local/ns/kubeflow/sa/ml-pipeline-ui
+  - from:
+    - source:
+        principals:
+        - cluster.local/ns/istio-system/sa/istio-ingressgateway-service-account
   # Allow traffic from User Pipeline Pods, which don't have a sidecar.
   - {}
+---
+apiVersion: security.istio.io/v1beta1
+kind: AuthorizationPolicy
+metadata:
+  name: seaweedfs-master-service
+  namespace: kubeflow
+spec:
+  action: ALLOW
+  selector:
+    matchLabels:
+      app: seaweedfs
+      component: master
+  rules:
+  - from:
+    - source:
+        namespaces:
+        - kubeflow
+---
+apiVersion: security.istio.io/v1beta1
+kind: AuthorizationPolicy
+metadata:
+  name: seaweedfs-volume-service
+  namespace: kubeflow
+spec:
+  action: ALLOW
+  selector:
+    matchLabels:
+      app: seaweedfs
+      component: volume
+  rules:
+  - from:
+    - source:
+        namespaces:
+        - kubeflow
 ---
 apiVersion: "networking.istio.io/v1alpha3"
 kind: DestinationRule
 metadata:
   name: ml-pipeline-seaweedfs
+  namespace: kubeflow
 spec:
   host: minio-service.kubeflow.svc.cluster.local
   trafficPolicy:

@@ -1,11 +1,26 @@
+# Persistent Volume Claims for persistent storage
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: seaweedfs-pvc
+  name: seaweedfs-master-pvc
   namespace: kubeflow
 spec:
   accessModes:
   - ReadWriteOnce
+  storageClassName: standard
   resources:
     requests:
-      storage: 20Gi
+      storage: 1Gi
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: seaweedfs-volume-pvc
+  namespace: kubeflow
+spec:
+  accessModes:
+  - ReadWriteOnce
+  storageClassName: standard
+  resources:
+    requests:
+      storage: 1Gi

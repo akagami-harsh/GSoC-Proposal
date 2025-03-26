@@ -1,13 +1,76 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: minio-service
+  name: seaweedfs-master
   namespace: kubeflow
+  labels:
+    app: seaweedfs
+    component: master
 spec:
   ports:
-  - name: http
-    port: 9000
-    protocol: TCP
-    targetPort: 8333
+  - port: 9333
+    name: master
+    targetPort: master
+  - port: 8888
+    name: filer
+    targetPort: filer
+  - port: 19333
+    name: master-grpc
+    targetPort: master-grpc
+  - port: 18888
+    name: filer-grpc
+    targetPort: filer-grpc
+  - port: 9334
+    name: master-metrics
+    targetPort: metrics
+  - port: 9335
+    name: filer-metrics
+    targetPort: filer-metrics
   selector:
     app: seaweedfs
+    component: master
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: seaweedfs-s3
+  namespace: kubeflow
+  labels:
+    app: seaweedfs
+    component: s3
+spec:
+  type: ClusterIP
+  ports:
+  - port: 8333
+    name: s3
+    targetPort: s3
+  - port: 9337
+    name: metrics
+    targetPort: metrics
+  selector:
+    app: seaweedfs
+    component: s3
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: seaweedfs-volume
+  namespace: kubeflow
+  labels:
+    app: seaweedfs
+    component: volume
+spec:
+  ports:
+  - port: 8080
+    name: volume
+    targetPort: volume
+  - port: 18080
+    name: volume-grpc
+    targetPort: volume-grpc
+  - port: 9336
+    name: metrics
+    targetPort: metrics
+  selector:
+    app: seaweedfs
+    component: volume
+
